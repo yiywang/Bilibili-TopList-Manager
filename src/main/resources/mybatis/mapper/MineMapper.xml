@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace=绑定一个对应的Dao接口-->
+<mapper namespace="com.wang.bilibuild.mapper.MineMapper">
+
+    <select id="getAll" resultType="Mine">
+        select * from ssmbuild.mine
+    </select>
+
+    <select id="getMineByBv" resultType="Mine" parameterType="java.lang.String">
+        select * from ssmbuild.mine where bv =#{bv}
+    </select>
+
+    <insert id="save" parameterType="Mine">
+        insert into ssmbuild.mine(bv, name, views, coins, favor, share, `like`, perlike, percoin, peifavor, url) VALUES (#{bv},#{name},#{views},#{coins},#{favor},#{share},#{like},#{perlike},#{percoin},#{peifavor},#{url})
+    </insert>
+
+    <update id="update" parameterType="Mine">
+        update ssmbuild.mine set `name`=#{name},`views`=#{views},`coins`=#{coins},`favor`=#{favor},`share`=#{share},`like`=#{like},`perlike`=#{perlike},`percoin`=#{percoin},`peifavor`=#{peifavor},`url`=#{url} where bv = #{bv}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from ssmbuild.mine where bv=#{bv}
+    </delete>
+
+
+    <select id="getCount" resultType="int">
+        select COUNT(*) from ssmbuild.mine
+    </select>
+
+    <select id="pageList" resultType="Mine" parameterType="map">
+        select * from ssmbuild.mine order by views limit #{indexNo},#{pageSize}
+    </select>
+
+    <select id="getBVs" resultType="java.lang.String">
+        select ssmbuild.mine.bv from ssmbuild.mine
+    </select>
+
+
+</mapper>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh_CN"xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>欢迎登录UP主非官方管理系统</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}"/>
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/signin.css}" rel="stylesheet">
+	</head>
+	<body class="text-center">
+		<form class="form-signin" th:action="@{/user/login}">
+			<img class="mb-4" th:src="@{/img/bilibili-fill.svg}" alt="" width="100" height="100">
+			<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}"></h1>
+			<p style="color: red" th:text="${msg}" th:if="${!#strings.isEmpty(msg)}"></p>
+			<label class="sr-only" th:text="#{login.username}"></label>
+			<input name="username" type="text" class="form-control" th:placeholder="#{login.username}" required="" autofocus="">
+			<label class="sr-only" th:text="#{login.password}"></label>
+			<input name="password" type="password" class="form-control" th:placeholder="#{login.password}" required="">
+			<div class="checkbox mb-3">
+				<label>
+          <input name="check" type="checkbox" value="checked"> [[#{login.remember}]]
+          <input name="check" type="hidden" value="unchecked">
+			<!--如果选中，最后传入的值一定不是uncheck，借此就可以判断是否选中-->
+        </label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.btn}"></button>
+			<p class="mt-5 mb-3 text-muted">© 2021-2022</p>
+			<p class="mt-5 mb-3 text-muted">建议使用电脑端访问</p>
+			<a class="btn btn-sm" th:href="@{/index.html(l='zh_CN')}">中文</a>
+			<a class="btn btn-sm" th:href="@{/index.html(l='en_US')}">English</a>
+		</form>
+
+	</body>
+
+</html>

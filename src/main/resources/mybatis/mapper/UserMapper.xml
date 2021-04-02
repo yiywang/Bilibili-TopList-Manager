@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace=绑定一个对应的Dao接口-->
+<mapper namespace="com.wang.bilibuild.mapper.UserMapper">
+
+    <select id="getAll" resultType="User">
+        select * from ssmbuild.user
+    </select>
+
+    <select id="getUsersById" resultType="User" parameterType="int">
+        select * from ssmbuild.user where id=#{id}
+    </select>
+
+    <select id="getUserNames" resultType="java.lang.String">
+        select `name` from ssmbuild.user
+    </select>
+
+    <select id="getPwdByName" resultType="java.lang.String" parameterType="java.lang.String">
+        select `password` from ssmbuild.user where `name`=#{name}
+    </select>
+
+    <insert id="save" parameterType="User">
+        insert into ssmbuild.user(id, name, password, admin) VALUES (#{id},#{name},#{password},#{admin})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update ssmbuild.user set `name`=#{name},`password`=#{password},`admin`=#{admin} where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from ssmbuild.user where id=#{id}
+    </delete>
+
+    <select id="getNames" resultType="java.lang.String">
+        select ssmbuild.user.name from ssmbuild.user
+    </select>
+
+    <update id="updateByName" parameterType="User">
+        update ssmbuild.user set `password`=#{password},`admin`=#{admin} where `name`=#{name}
+    </update>
+
+    <select id="getStatuesByName" parameterType="java.lang.String" resultType="int">
+        select ssmbuild.user.admin from ssmbuild.user where ssmbuild.user.name = #{name}
+    </select>
+
+
+</mapper>

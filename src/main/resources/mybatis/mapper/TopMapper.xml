@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace=绑定一个对应的Dao接口-->
+<mapper namespace="com.wang.bilibuild.mapper.TopMapper">
+
+
+    <select id="getAll" resultType="Top">
+        select * from ssmbuild.top
+    </select>
+
+    <insert id="save" parameterType="Top">
+        insert into ssmbuild.top(bv, name, views, coins,danmuku, favor, share, `like`, perlike, percoin, peifavor,date, url) VALUES (#{bv},#{name},#{views},#{coins},#{danmuku},#{favor},#{share},#{like},#{perlike},#{percoin},#{peifavor},#{date},#{url})
+    </insert>
+
+    <update id="update" parameterType="Top">
+        update ssmbuild.top set `name`=#{name},`views`=#{views},`coins`=#{coins},`favor`=#{favor},`share`=#{share},`like`=#{like},`perlike`=#{perlike},`percoin`=#{percoin},danmuku=#{danmuku},date=#{date},`peifavor`=#{peifavor},`url`=#{url} where bv = #{bv}
+    </update>
+
+    <select id="getBVs" resultType="java.lang.String">
+        select ssmbuild.top.bv from ssmbuild.top
+    </select>
+
+    <select id="getCount" resultType="int">
+        select COUNT(*) from ssmbuild.top
+    </select>
+
+    <select id="pageList" resultType="Top" parameterType="map">
+        select * from ssmbuild.top order by views limit #{indexNo},#{pageSize}
+    </select>
+
+    <select id="getThisMonth" resultType="Top" parameterType="map">
+        SELECT * FROM ssmbuild.`top` a WHERE MONTH(a.`date`)=MONTH(CURDATE()) order by views limit #{indexNo},#{pageSize}
+    </select>
+
+    <select id="getThisMonthCount" resultType="int">
+        select COUNT(*) from ssmbuild.`top` a WHERE MONTH(a.`date`)=MONTH(CURDATE())
+    </select>
+
+</mapper>
